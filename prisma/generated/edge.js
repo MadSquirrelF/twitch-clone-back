@@ -131,7 +131,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\twitch-clone-back\\prisma\\generated",
+      "value": "/Users/shabanovartem/Desktop/react-projects/twitch-clone-back/prisma/generated",
       "fromEnvVar": null
     },
     "config": {
@@ -140,16 +140,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "darwin-arm64",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\twitch-clone-back\\prisma\\schema.prisma",
+    "sourceFilePath": "/Users/shabanovartem/Desktop/react-projects/twitch-clone-back/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "..",
