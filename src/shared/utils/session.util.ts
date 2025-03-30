@@ -14,7 +14,6 @@ export function saveSession(
     return new Promise((resolve, reject) => {
         req.session.createdAt = new Date()
         req.session.userId = user.id
-
         req.session.metadata = metadata
 
         req.session.save(err => {
