@@ -7,7 +7,7 @@ export async function generateToken(
     prismaService: PrismaService,
     user: User,
     type: TokenType,
-    IsUUID: boolean = false
+    IsUUID: boolean = true
 ) {
     let token: string
 

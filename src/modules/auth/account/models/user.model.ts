@@ -27,11 +27,23 @@ export class UserModel implements User {
     @Field(() => String, { nullable: true })
     public avatar: string
 
+    @Field(() => String, { nullable: true })
+    public totpSecret: string
+
+    @Field(() => Date, { nullable: true })
+    public diactivatedAt: Date
+
+    @Field(() => Boolean)
+    public isDeactivated: boolean
+
     @Field(() => Boolean)
     public isVerified: boolean
 
     @Field(() => Boolean)
     public isEmailVerified: boolean
+
+    @Field(() => Boolean)
+    public isTotpEnabled: boolean
 
     @Field(() => Date)
     public updatedAt: Date

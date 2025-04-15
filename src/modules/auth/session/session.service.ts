@@ -8,6 +8,7 @@ import {
 import { ConfigService } from '@nestjs/config'
 import { verify } from 'argon2'
 import type { Request } from 'express'
+import { TOTP } from 'otpauth'
 
 import { PrismaService } from '@/src/core/prisma/prisma.service'
 import { RedisService } from '@/src/core/redis/redis.service'
@@ -74,7 +75,7 @@ export class SessionService {
     }
 
     public async login(req: Request, inputs: LoginInput, userAgent: string) {
-        const { login, password } = inputs
+        const { login, password, pin } = inputs
 
         const user = await this.prismaService.user.findFirst({
             where: {
@@ -111,6 +112,28 @@ export class SessionService {
             throw new BadRequestException(
                 'Аккаунт не верифицирован. Пожалуйста, проверьте свою почту для подтверждения'
             )
+        }
+
+        if (user.isTotpEnabled) {
+            if (!pin) {
+                return {
+                    message: 'Необходим код для завершения авторизации'
+                }
+            }
+
+            const totp = new TOTP({
+                issuer: 'TwitchClone',
+                label: `${user.email}`,
+                algorithm: 'SHA1',
+                digits: 6,
+                secret: user.totpSecret
+            })
+
+            const delta = totp.validate({ token: pin })
+
+            if (delta === null) {
+                throw new BadRequestException('Неверный код')
+            }
         }
 
         const metadata = getSessionMetadata(req, userAgent)
