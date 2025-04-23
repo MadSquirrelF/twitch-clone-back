@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
 
 import { User } from '@/prisma/generated'
+import { StreamModel } from '@/src/modules/stream/models/stream.model'
 
 import { SocialLinkModel } from '../../profile/models/social-link.model'
 
@@ -46,6 +47,9 @@ export class UserModel implements User {
 
     @Field(() => Boolean)
     public isTotpEnabled: boolean
+
+    @Field(() => StreamModel)
+    public stream: StreamModel
 
     @Field(() => [SocialLinkModel])
     public socialLinks: SocialLinkModel[]

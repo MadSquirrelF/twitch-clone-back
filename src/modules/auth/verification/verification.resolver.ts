@@ -3,6 +3,7 @@ import { Args, Context, Mutation, Resolver } from '@nestjs/graphql'
 import { UserAgent } from '@/src/shared/decorators/user-agent.decorator'
 import { GqlContext } from '@/src/shared/types/gql-context.types'
 
+import { AuthModel } from '../account/models/auth.model'
 import { UserModel } from '../account/models/user.model'
 
 import { VerificationInput } from './inputs/verification.inputs'
@@ -14,7 +15,7 @@ export class VerificationResolver {
         private readonly verificationService: VerificationService
     ) {}
 
-    @Mutation(() => UserModel, { name: 'verifyAccount' })
+    @Mutation(() => AuthModel, { name: 'verifyAccount' })
     public async verify(
         @Context() { req }: GqlContext,
         @Args('data') input: VerificationInput,
