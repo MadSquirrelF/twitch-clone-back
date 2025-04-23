@@ -8,21 +8,38 @@ datasource db {
   url      = env("POSTGRES_URI")
 }
 
+model SocialLink {
+  id String @id @default(uuid())
+
+  title    String
+  url      String
+  position Int
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @map("user_id")
+
+  @@map("social_links")
+}
+
 model User {
-  id              String    @id @default(uuid())
-  email           String    @unique
+  id              String       @id @default(uuid())
+  email           String       @unique
   password        String
-  username        String    @unique
-  displayName     String    @map("display_name")
+  username        String       @unique
+  displayName     String       @map("display_name")
   avatar          String?
   bio             String?
-  isVerified      Boolean   @default(false) @map("is_verified")
-  isEmailVerified Boolean   @default(false) @map("is_email_verified")
-  isTotpEnabled   Boolean   @default(false) @map("is_totp_enabled")
-  totpSecret      String?   @map("totp_secret")
-  isDeactivated   Boolean   @default(false) @map("is_diactivated")
-  diactivatedAt   DateTime? @map("diactivated_at")
+  isVerified      Boolean      @default(false) @map("is_verified")
+  isEmailVerified Boolean      @default(false) @map("is_email_verified")
+  isTotpEnabled   Boolean      @default(false) @map("is_totp_enabled")
+  totpSecret      String?      @map("totp_secret")
+  isDeactivated   Boolean      @default(false) @map("is_diactivated")
+  diactivatedAt   DateTime?    @map("diactivated_at")
   tokens          Token[]
+  socialLinks     SocialLink[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

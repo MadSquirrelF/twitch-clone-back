@@ -117,6 +117,16 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.SocialLinkScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  url: 'url',
+  position: 'position',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -166,6 +176,7 @@ exports.TokenType = exports.$Enums.TokenType = {
 };
 
 exports.Prisma.ModelName = {
+  SocialLink: 'SocialLink',
   User: 'User',
   Token: 'Token'
 };
